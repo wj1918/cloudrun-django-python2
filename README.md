@@ -18,4 +18,14 @@ docker build --tag cloudrun-django:python .
 
 docker run --rm -p 9090:8080 -e PORT=8080 cloudrun-django:python
 
+```sh
+# Set an environment variable with your GCP Project ID
+export GOOGLE_CLOUD_PROJECT=<PROJECT_ID>
 
+# Submit a build using Google Cloud Build
+gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/cloudrun-django
+
+# Deploy to Cloud Run
+gcloud run deploy cloudrun-django \
+--image gcr.io/${GOOGLE_CLOUD_PROJECT}/cloudrun-django
+```
